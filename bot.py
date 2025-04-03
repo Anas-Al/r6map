@@ -1,4 +1,3 @@
-from keep_alive import keep_alive
 import discord
 import os
 import random
@@ -10,11 +9,9 @@ client = discord.Client(intents=intents)
 
 MAPS_FOLDER = "."
 
-
 @client.event
 async def on_ready():
     print(f"✅ Logged in as {client.user}")
-
 
 @client.event
 async def on_message(message):
@@ -22,11 +19,8 @@ async def on_message(message):
         return
 
     if message.content.lower() == "!r6map":
-        map_images = [
-            f for f in os.listdir(MAPS_FOLDER)
-            if f.endswith(('.png', '.jpg', '.jpeg'))
-        ]
-        print("Images found:", map_images)  # Debugging
+        map_images = [f for f in os.listdir(MAPS_FOLDER) if f.endswith(('.png', '.jpg', '.jpeg'))]
+        print("Images found:", map_images)
 
         if not map_images:
             await message.channel.send("❌ No map images found.")
@@ -37,20 +31,17 @@ async def on_message(message):
 
         with open(os.path.join(MAPS_FOLDER, selected_map), 'rb') as f:
             picture = discord.File(f)
-            await message.channel.send(f"🗺️ Random Map: **{map_name}**",
-                                       file=picture)
+            await message.channel.send(f"🗺️ Random Map: **{map_name}**", file=picture)
+
     if message.content.lower() == "!lowf":
         with open("lowf.jpg", "rb") as f:
             file = discord.File(f)
             await message.channel.send("lowf is a retard", file=file)
+
     if message.content.lower() == "!dash":
         with open("dash.jpg", "rb") as f:
             file = discord.File(f)
             await message.channel.send("6'8 280 and rich", file=file)
 
-
-# Replace with your bot token
-# Existing code above...
-
-import os
+# ✅ Final line to start bot
 client.run(os.getenv("TOKEN"))
