@@ -52,16 +52,5 @@ async def on_message(message):
 # Replace with your bot token
 # Existing code above...
 
-from keep_alive import keep_alive
-import time
-
-keep_alive()
-
-while True:
-    try:
-        client.run(os.getenv("TOKEN"))
-    except Exception as e:
-        print(f"❌ Bot crashed: {e}")
-        print("🔁 Restarting in 5 seconds...")
-        time.sleep(5)
-
+import os
+client.run(os.getenv("TOKEN"))
